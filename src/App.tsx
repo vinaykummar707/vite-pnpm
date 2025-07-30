@@ -1,16 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from './components/ui/button'
+// App.tsx
+import { Routes, Route } from 'react-router-dom'
+
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
-
   return (
-    <>
-      <h1 className='text-3xl font-bold mb-4'>Vite + React</h1>
-      <Button variant={'outline'}>Click me</Button>
-    </>
+    <Routes>
+      <Route path='/' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+      <Route path='/dashboard' element={
+        <ProtectedRoute>
+          <Dashboard/>
+        </ProtectedRoute>
+      }/>
+      <Route path="/login" element={<Login />} />
+    </Routes>
   )
 }
 
