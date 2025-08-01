@@ -1,7 +1,6 @@
 // components/RoleProtectedRoute.tsx
 import { Navigate } from 'react-router-dom'
 import { useAuthenticationStatus } from '@nhost/react'
-import { useUserRole } from '../hooks/useUserRole'
 import type { JSX } from 'react'
 
 export const RoleProtectedRoute = ({
@@ -12,11 +11,10 @@ export const RoleProtectedRoute = ({
   allowedRoles: string[]
 }) => {
   const { isAuthenticated, isLoading } = useAuthenticationStatus()
-  const role = useUserRole()
 
   if (isLoading) return <p>Loading...</p>
   if (!isAuthenticated) return <Navigate to="/login" />
-  if (!allowedRoles.includes(role || '')) return <Navigate to="/unauthorized" />
+  // if (!allowedRoles.includes(role || '')) return <Navigate to="/unauthorized" />
 
   return children
 }

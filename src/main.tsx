@@ -6,14 +6,25 @@ import { BrowserRouter } from 'react-router-dom'
 import { NhostProvider } from '@nhost/react'
 import { nhost } from './lib/nhost.ts'
 import { AuthProvider } from './providers/AuthProvider.tsx'
+import { ThemeProvider } from './providers/ThemeProvider.tsx'
+import { ApolloProvider } from '@apollo/client'
+import client from './lib/apolloClient.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthProvider>
-    <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthProvider>
-     
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <AuthProvider>
+        <ApolloProvider client={client}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ApolloProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>,
 )

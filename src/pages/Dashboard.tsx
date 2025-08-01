@@ -25,8 +25,9 @@ export default function Dashboard() {
     
     
     return (
-      <div>
-        <h2>Dashboard</h2>
+      <div className="flex flex-col gap-4">
+        <h2 className="text-lg font-medium">Dashboard</h2>
+       
       </div>
     )
   }

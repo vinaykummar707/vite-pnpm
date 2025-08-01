@@ -9,7 +9,7 @@ type AuthContextType = {
     loading: boolean
   }
 
-  const AuthContext = createContext<AuthContextType | undefined>(undefined)
+  const AuthContext = createContext<AuthContextType >({loading: false, user: null})
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User>()

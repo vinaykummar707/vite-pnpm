@@ -10,7 +10,6 @@ import {
     SidebarMenuItem
 } from '@/components/ui/sidebar';
 
-import { DialysisUnitSelect } from './DialysisUnitSelect';
 import {
     Armchair,
     Calendar,
@@ -25,6 +24,7 @@ import {
     Warehouse,
     WashingMachine
 } from 'lucide-react';
+import { DialysisUnitSelect } from './DialysisUnitSelect';
 
 // Menu items.
 const items = [
