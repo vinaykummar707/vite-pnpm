@@ -8,15 +8,13 @@ import NavigationBar from './NavigationBar';
 
 const Layout: React.FC = () => {
   return (
-    <SidebarProvider  defaultOpen={true}>
-    <div className="flex h-screen w-screen">
+    <SidebarProvider   defaultOpen={true}>
+    <div className="flex h-screen w-screen overflow-hidden">
       <AppSidebar />
-      <div className="flex  flex-col flex-1">
+      <div className="flex  flex-col  flex-1">
         <NavigationBar/>
-        <main className="flex-1  overflow-auto ">
-        <div className="max-w-7xl p-4 mx-auto w-full">
+        <main className="flex-1 overflow-auto no-scrollbar  p-8 bg-gradient-to-b from-sidebar to-background mx-4  rounded-2xl  ">
             <Outlet />
-          </div>
         </main>
       </div>
     </div>

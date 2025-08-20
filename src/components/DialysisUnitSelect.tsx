@@ -10,7 +10,8 @@ import {
 import { gql, useSubscription, useQuery } from '@apollo/client';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useDialysisUnitStore } from '@/store/useDialysisUnitStore';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useAuth } from '@/providers/AuthProvider';
 
 const GET_DIALYSIS_UNITS = gql`
   subscription GetDialysisUnits {
@@ -22,9 +23,17 @@ const GET_DIALYSIS_UNITS = gql`
   }
 `;
 
-const GET_DIALYSIS_UNITS_QUERY = gql`
-  query GetDialysisUnitsQuery {
-    dialysis_units(order_by: { name: asc }) {
+const GET_UNIT_ADMIN = gql`
+  query GetUnitAdmin($id: uuid!) {
+    unit_admins_by_pk(id: $id) {
+      dialysis_unit_id
+    }
+  }
+`;
+
+const GET_DIALYSIS_UNIT_BY_ID = gql`
+  query GetDialysisUnitById($id: uuid!) {
+    dialysis_units_by_pk(id: $id) {
       id
       name
       location
@@ -33,37 +42,53 @@ const GET_DIALYSIS_UNITS_QUERY = gql`
 `;
 
 export function DialysisUnitSelect() {
-  const [useQueryFallback, setUseQueryFallback] = useState(false);
-  const { data: subData, loading: subLoading, error: subError } = useSubscription(GET_DIALYSIS_UNITS);
-  const { data: queryData, loading: queryLoading, error: queryError } = useQuery(GET_DIALYSIS_UNITS_QUERY, {
-    skip: !useQueryFallback,
-  });
-  
   const { selectedUnit, setSelectedUnit } = useDialysisUnitStore();
+  const auth = useAuth();
+  const user = auth?.user;
+  const role = user?.user_metadata?.role;
+  const userId = user?.id;
 
-  // Use subscription data by default, fallback to query if subscription fails
-  const data = useQueryFallback ? queryData : subData;
-  const loading = useQueryFallback ? queryLoading : subLoading;
-  const error = useQueryFallback ? queryError : subError;
+  // MASTER: fetch all units
+  const {
+    data: allUnitsData,
+    loading: allUnitsLoading,
+    error: allUnitsError,
+  } = useSubscription(GET_DIALYSIS_UNITS, { skip: role !== 'MASTER' });
 
-  // Debug logging
-  useEffect(() => {
-    console.log('DialysisUnitSelect - Subscription Data:', subData);
-    console.log('DialysisUnitSelect - Subscription Loading:', subLoading);
-    console.log('DialysisUnitSelect - Subscription Error:', subError);
-    console.log('DialysisUnitSelect - Using Query Fallback:', useQueryFallback);
-  }, [subData, subLoading, subError, useQueryFallback]);
+  // UNIT_ADMIN: fetch only assigned unit
+  const {
+    data: adminData,
+    loading: adminLoading,
+    error: adminError,
+  } = useQuery(GET_UNIT_ADMIN, {
+    variables: { id: userId },
+    skip: role !== 'UNIT_ADMIN' || !userId,
+  });
 
-  // Fallback to query if subscription fails
-  useEffect(() => {
-    if (subError && !useQueryFallback) {
-      console.log('Subscription failed, falling back to query');
-      setUseQueryFallback(true);
-    }
-  }, [subError, useQueryFallback]);
+  const dialysisUnitId = adminData?.unit_admins_by_pk?.dialysis_unit_id;
+
+  const {
+    data: unitData,
+    loading: unitLoading,
+    error: unitError,
+  } = useQuery(GET_DIALYSIS_UNIT_BY_ID, {
+    variables: { id: dialysisUnitId },
+    skip: !dialysisUnitId || role !== 'UNIT_ADMIN',
+  });
+
+  // Combine loading and error states
+  const loading = allUnitsLoading || adminLoading || unitLoading;
+  const error = allUnitsError || adminError || unitError;
+
+  // Prepare units array
+  let units: any[] = [];
+  if (role === 'MASTER') {
+    units = allUnitsData?.dialysis_units || [];
+  } else if (role === 'UNIT_ADMIN' && unitData?.dialysis_units_by_pk) {
+    units = [unitData.dialysis_units_by_pk];
+  }
 
   const handleChange = (id: string) => {
-    const units = data?.dialysis_units || [];
     const unit = units.find((u: any) => u.id === id);
     if (unit) setSelectedUnit(unit);
   };
@@ -71,23 +96,12 @@ export function DialysisUnitSelect() {
   if (loading) return <Skeleton className="w-full h-10 rounded-md" />;
 
   if (error) {
-    console.error('Data loading error:', error);
     return (
       <div className="w-full p-2 text-sm text-red-500 border border-red-200 rounded-md">
         Error loading dialysis units: {error.message}
-        {!useQueryFallback && (
-          <button 
-            onClick={() => setUseQueryFallback(true)}
-            className="ml-2 underline"
-          >
-            Try query instead
-          </button>
-        )}
       </div>
     );
   }
-
-  const units = data?.dialysis_units || [];
 
   return (
     <div className="w-full space-y-2">
@@ -108,9 +122,6 @@ export function DialysisUnitSelect() {
       </Select>
       {units.length === 0 && !loading && (
         <p className="text-sm text-muted-foreground">No dialysis units found</p>
-      )}
-      {useQueryFallback && (
-        <p className="text-xs text-muted-foreground">Using query fallback (subscription unavailable)</p>
       )}
     </div>
   );

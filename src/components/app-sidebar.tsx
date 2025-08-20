@@ -7,7 +7,8 @@ import {
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem
+    SidebarMenuItem,
+    useSidebar
 } from '@/components/ui/sidebar';
 
 import {
@@ -25,12 +26,13 @@ import {
     WashingMachine
 } from 'lucide-react';
 import { DialysisUnitSelect } from './DialysisUnitSelect';
+import { useLocation } from 'react-router-dom';
 
 // Menu items.
 const items = [
     {
         title: 'Dashboard',
-        url: '/',
+        url: '/dashboard',
         icon: LayoutGrid
     },
     {
@@ -44,7 +46,7 @@ const items = [
         url: '/patients',
         icon: Users
     },
-     {
+    {
         title: 'Machines',
         url: '/machines',
         icon: WashingMachine
@@ -67,13 +69,23 @@ const items = [
 ];
 
 export function AppSidebar() {
+    const location = useLocation();
+    const { state } = useSidebar();
     return (
-        <Sidebar>
+        <Sidebar collapsible='icon' variant='sidebar'>
             <SidebarHeader>
                 <SidebarMenu>
-                    <SidebarHeader>Nephy</SidebarHeader>
+                    {state === 'expanded' && (
+                        <SidebarHeader className='text-xl'>Nephy</SidebarHeader>
+
+                    )}
                     <SidebarMenuItem>
-                        <DialysisUnitSelect />
+                        {/* Only show DialysisUnitSelect when sidebar is expanded */}
+                        {state === 'expanded' && (
+                            <SidebarMenuItem>
+                                <DialysisUnitSelect />
+                            </SidebarMenuItem>
+                        )}
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
@@ -84,7 +96,7 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
+                                    <SidebarMenuButton isActive={location.pathname === item.url} asChild>
                                         <a href={item.url}>
                                             <item.icon strokeWidth={2} />
                                             <span>{item.title}</span>

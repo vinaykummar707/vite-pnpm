@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogOut } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { SidebarTrigger } from "./ui/sidebar";
 
 export default function NavigationBar() {
     const auth = useAuth();
@@ -20,7 +21,7 @@ export default function NavigationBar() {
 
     // Get user info
     const {
-        user_metadata: { full_name = "", avatar_url = "" } = {},
+        user_metadata: { full_name = "", avatar_url = "" , role = ""} = {},
         email = "",
     } = user || {};
 
@@ -42,8 +43,10 @@ export default function NavigationBar() {
     };
 
     return (
-        <nav className="w-full bg-background h-14 flex items-center justify-between px-4  border-b border-border">
-            <div className="font-semibold text-base"></div>
+        <nav className=" bg-background h-16 flex items-center justify-between px-4  border-bs border-border">
+            <div className="font-semibold text-base">
+                <SidebarTrigger/>
+            </div>
 
             {user && (
                 <div className="flex items-center gap-2">
@@ -66,9 +69,10 @@ export default function NavigationBar() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuItem
-                                className=""
+                                className=" items-start border-b rounded-none mb-2 flex-col"
                             >
                                 <span className="text-sm text-foreground"> {full_name || email}</span>
+                                <span className="text-xs capitalize text-muted-foreground"> {role}</span>
 
 
                             </DropdownMenuItem>
