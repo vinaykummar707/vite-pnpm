@@ -1,51 +1,22 @@
 'use client'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { EditMachineDialog } from './EditMachineDialog';
 import { DeleteMachineDialog } from './DeleteMachineDialog';
-import { Alert,  AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { TriangleAlertIcon } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 export function MachineTable({ machines }: { machines: any[] }) {
     return (
-    //   <Alert className='bg-destructive/10 text-destructive border-none'>
-    //   <TriangleAlertIcon />
-    //   <AlertTitle>Upload failed</AlertTitle>
-    //   <AlertDescription className='text-destructive/80'>
-    //     Something went wrong. Please try again or use a different file format.
-    //   </AlertDescription>
-    // </Alert>
-    <Card className='bg-destructive/10 text-destructive border h-[200px] border-destructive/20'>
-
-    </Card>
+    <div className="grid grid-cols-4 gap-4">
+    {machines.map((machine) => (
+        <Card key={machine.id} className="shadow-none  bg-secondary dark:bg-card">
+            <CardContent>
+                <h3 className="text-md font-bold">{machine.name}</h3>
+                <p className="text-xs">{machine.is_occupied ? <span className="text-red-500">Occupied</span> : <span className="text-green-500">Available</span>}</p>
+                <div className="space-x-2 mt-2">
+                    <EditMachineDialog machine={machine} />
+                    <DeleteMachineDialog id={machine.id} />
+                </div>
+            </CardContent>
+        </Card>
+    ))}
+</div>
     );
 }

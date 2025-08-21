@@ -9,6 +9,7 @@ import { AuthProvider } from './providers/AuthProvider.tsx'
 import { ThemeProvider } from './providers/ThemeProvider.tsx'
 import { ApolloProvider } from '@apollo/client'
 import client from './lib/apolloClient.ts'
+import { ChatApp } from './components/chatapp.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

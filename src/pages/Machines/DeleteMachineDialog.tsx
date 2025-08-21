@@ -5,14 +5,8 @@ import { Button } from '@/components/ui/button'
 import { gql, useMutation } from '@apollo/client'
 import { toast } from 'sonner'
 import { useState } from 'react'
+import { DELETE_MACHINE } from '@/gql/machines/machines.gql'
 
-const DELETE_MACHINE = gql`
-  mutation SoftDeleteMachine($id: uuid!, $deletedAt: timestamptz!) {
-    update_machines_by_pk(pk_columns: { id: $id }, _set: { deleted_at: $deletedAt }) {
-      id
-    }
-  }
-`
 
 export function DeleteMachineDialog({ id }: { id: string }) {
   const [open, setOpen] = useState(false)

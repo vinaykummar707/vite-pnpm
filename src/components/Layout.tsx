@@ -13,7 +13,7 @@ const Layout: React.FC = () => {
       <AppSidebar />
       <div className="flex  flex-col  flex-1">
         <NavigationBar/>
-        <main className="flex-1 overflow-auto no-scrollbar  p-8 bg-gradient-to-b from-sidebar to-background mx-4  rounded-2xl  ">
+        <main className="flex-1 overflow-auto no-scrollbar   p-6 bg-gradient-to-b from-white to-background dark:from-secondary dark:to-background mx-4  rounded-2xl  ">
             <Outlet />
         </main>
       </div>

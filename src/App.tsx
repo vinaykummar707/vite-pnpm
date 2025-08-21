@@ -8,6 +8,8 @@ import Signup from './pages/Signup'
 import Layout from './components/Layout'
 import OnboardingDialysisUnit from './pages/Onboarding/OnboardingDialysisUnit'
 import MachinesPage from './pages/Machines/MachinesPage'
+import PatientsPage from './pages/Patients/PatientsPage'
+import DepartmentsPage from './pages/Departments/DepartmentsPage'
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/machines" element={<MachinesPage />} />
+        <Route path="/patients" element={<PatientsPage />} />
+        <Route path="/departments" element={<DepartmentsPage />} />
        
         {/* Add more routes here */}
       </Route>

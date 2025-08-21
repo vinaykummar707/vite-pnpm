@@ -31,14 +31,7 @@ export default function Dashboard() {
     return (
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-medium">Dashboard</h2>
-        <Alert className='bg-destructive/10 text-destructive border-none'>
-      <TriangleAlertIcon />
-      <AlertTitle>Upload failed</AlertTitle>
-      <AlertDescription className='text-destructive/80'>
-        Something went wrong. Please try again or use a different file format.
-      </AlertDescription>
-    </Alert>
-      <Stats01/>
+       
         <Card className="h-[200px]">
 
         </Card>

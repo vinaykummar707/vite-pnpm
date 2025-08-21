@@ -26,18 +26,7 @@ const data = [
     change: "-5.73%",
     changeType: "negative",
   },
-  {
-    name: "Pending orders",
-    value: "$173,229.00",
-    change: "+2.87%",
-    changeType: "positive",
-  },
-  {
-    name: "Pending orders",
-    value: "$173,229.00",
-    change: "+2.87%",
-    changeType: "positive",
-  },
+
 ];
 
 export default function Stats01() {

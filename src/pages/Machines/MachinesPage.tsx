@@ -4,21 +4,10 @@ import { useDialysisUnitStore } from '@/store/useDialysisUnitStore'
 import { useSubscription, gql } from '@apollo/client'
 import { AddMachineDialog } from './AddMachineDialog'
 import { MachineTable } from './MachineTable'
+import { GET_MACHINES } from '@/gql/machines/machines.gql'
 
 
-const GET_MACHINES = gql`
-  subscription GetMachines($unitId: uuid!) {
-    machines(
-      where: { dialysis_unit_id: { _eq: $unitId }, deleted_at: { _is_null: true } }
-      order_by: { created_at: asc }
-    ) {
-      id
-      name
-      is_occupied
-      patient_id
-    }
-  }
-`
+
 
 export default function MachinesPage() {
   const { selectedUnit } = useDialysisUnitStore()

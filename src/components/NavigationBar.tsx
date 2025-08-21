@@ -43,7 +43,7 @@ export default function NavigationBar() {
     };
 
     return (
-        <nav className=" bg-background h-16 flex items-center justify-between px-4  border-bs border-border">
+        <nav className=" bg-background h-14 flex items-center justify-between px-4  border-bs border-border">
             <div className="font-semibold text-base">
                 <SidebarTrigger/>
             </div>
@@ -54,11 +54,11 @@ export default function NavigationBar() {
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Avatar className="w-8 h-8 cursor-pointer ">
+                            <Avatar  className="w-8 h-8  cursor-pointer ">
                                 {avatar_url ? (
                                     <AvatarImage src={avatar_url} alt={full_name || email} />
                                 ) : null}
-                                <AvatarFallback className="text-xs  font-bold">
+                                <AvatarFallback  className="text-xs bg-primary text-primary-foreground  font-bold">
                                     {full_name
                                         ? getInitials(full_name)
                                         : email
