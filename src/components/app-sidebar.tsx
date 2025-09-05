@@ -46,6 +46,7 @@ const items = [
         url: '/patients',
         icon: Users
     },
+   
     {
         title: 'Machines',
         url: '/machines',
@@ -55,6 +56,11 @@ const items = [
         title: 'Technicians',
         url: '/technicians',
         icon: CircleUser
+    },
+    {
+        title: 'Records',
+        url: '/records',
+        icon: WashingMachine
     },
     {
         title: 'Departments',

@@ -43,7 +43,7 @@ export default function NavigationBar() {
     };
 
     return (
-        <nav className=" bg-background h-14 flex items-center justify-between px-4  border-bs border-border">
+        <nav className=" bg-background h-14 px-4  flex items-center justify-between borde">
             <div className="font-semibold text-base">
                 <SidebarTrigger/>
             </div>

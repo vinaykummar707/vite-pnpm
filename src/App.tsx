@@ -10,6 +10,11 @@ import OnboardingDialysisUnit from './pages/Onboarding/OnboardingDialysisUnit'
 import MachinesPage from './pages/Machines/MachinesPage'
 import PatientsPage from './pages/Patients/PatientsPage'
 import DepartmentsPage from './pages/Departments/DepartmentsPage'
+import TechniciansPage from './pages/Technicians/TechniciansPage'
+import DialysisRecordsPage from './pages/DialysisRecords/DialysisRecordsPage'
+import DialysisRecordDetailsPage from './pages/DialysisRecords/DialysisRecordDetailsPage'
+
+
 
 function App() {
   return (
@@ -26,9 +31,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/machines" element={<MachinesPage />} />
         <Route path="/patients" element={<PatientsPage />} />
+        <Route path="/records" element={<DialysisRecordsPage />} />
+        <Route path="/records/:recordId" element={<DialysisRecordDetailsPage />} />
         <Route path="/departments" element={<DepartmentsPage />} />
-       
-        {/* Add more routes here */}
+        <Route path="/technicians" element={<TechniciansPage />} />
       </Route>
     </Routes>
   )
