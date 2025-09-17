@@ -1,1 +1,1 @@
-/// <reference types="vite/client" />
+ViewTransition/// <reference types="vite/client" />
