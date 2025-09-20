@@ -175,7 +175,6 @@ export const columns: ColumnDef<DialysisRecord>[] = [
             const r = row.original
             const hasStarted = Boolean(r.started_at)
             const [startDialysis, { loading: startDialysisLoading }] = useMutation(UPDATE_STARTED_AT);
-            const [occupyMachine, { loading: occupyMachineLoading }] = useMutation(OCCUPY_MACHINE);
             const [freeMachine, { loading: freeMachineLoading }] = useMutation(FREE_MACHINE);
             const [stopDialysis, { loading: stopDialysisLoading }] = useMutation(UPDATE_ENDED_AT);
             let navigate = useNavigate();
@@ -192,10 +191,9 @@ export const columns: ColumnDef<DialysisRecord>[] = [
                             <DropdownMenuItem onClick={() => {
                                 console.log("clikced")
                                 startDialysis({ variables: { id: r.id } });
-                                occupyMachine({ variables: { id: r.machine.id, patientId: r.patient.id } })
                             }}>
                                 <Check size={14} className="mr-2" />
-                                {startDialysisLoading && occupyMachineLoading ? 'Starting' : 'Start'}
+                                {startDialysisLoading   ? 'Starting' : 'Start'}
                             </DropdownMenuItem>
                         )}
                         {hasStarted && !r.ended_at && (

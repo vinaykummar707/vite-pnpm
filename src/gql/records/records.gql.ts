@@ -13,8 +13,8 @@ export const GET_DIALYSIS_RECORDS_BY_DATE = gql`
   subscription GetDialysisRecordsByDate($unitId: uuid!, $date: date!) {
     dialysis_records(
       where: {
-        dialysis_unit_id: { _eq: $unitId }
-        _and: { created_date: {_eq: $date} }
+        dialysis_unit_id: { _eq: $unitId },
+        deleted_at: { _is_null: true } 
       }
       order_by: { created_at: desc }
     ) {
@@ -115,4 +115,16 @@ export const UPDATE_ENDED_AT = gql`
       started_at
     }
   }
+`;
+
+
+export const DELETE_DIALYSIS_RECORD = gql`
+mutation DeleteDialysisRecord($id: uuid!, $deletedAt: timestamp!, $userId: uuid!) {
+  update_dialysis_records_by_pk(
+    pk_columns: { id: $id }
+    _set: { deleted_at: $deletedAt, deleted_by:  $userId }
+  ) {
+    id
+  }
+}
 `;

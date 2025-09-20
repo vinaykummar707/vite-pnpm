@@ -10,17 +10,22 @@ import { useDialysisUnitStore } from "@/store/useDialysisUnitStore";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DialysisRecordForm, type DialysisRecordFormData } from "./DialysisRecordForm";
 import { ADD_DIALYSIS_RECORD } from "@/gql/records/records.gql";
+import { OCCUPY_MACHINE } from "@/gql/machines/machines.gql";
 
 
 
 export function AddDialysisRecordDialog() {
   const [open, setOpen] = useState(false);
   const [addDialysisRecord, { loading }] = useMutation(ADD_DIALYSIS_RECORD);
+  const [occupyMachine, { loading: occupyMachineLoading }] = useMutation(OCCUPY_MACHINE);
+  
   // const {selectedUnit} = useDialysisUnitStore()
 
   const handleAdd = async (data: DialysisRecordFormData) => {
     try {
       await addDialysisRecord({ variables: { object: data } });
+      await occupyMachine({ variables: { id: data.machine_id, patientId: data.patient_id } })
+
       toast.success("Record added");
       setOpen(false);
     } catch (e: any) {
@@ -41,7 +46,7 @@ export function AddDialysisRecordDialog() {
 
         </DialogHeader>
         <ScrollArea className="h-[480px]">
-          <DialysisRecordForm onSubmit={handleAdd} loading={loading} />
+          <DialysisRecordForm onSubmit={handleAdd} loading={loading && occupyMachineLoading} />
 
         </ScrollArea>
       </DialogContent>
