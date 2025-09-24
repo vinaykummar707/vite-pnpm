@@ -45,7 +45,7 @@ export default function NavigationBar() {
     return (
         <nav className=" bg-background h-14 px-4  flex items-center justify-between borde">
             <div className="font-semibold text-base">
-                <SidebarTrigger/>
+                {/* <SidebarTrigger/> */}
             </div>
 
             {user && (

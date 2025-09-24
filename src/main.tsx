@@ -10,7 +10,6 @@ import { ThemeProvider } from './providers/ThemeProvider.tsx'
 import { ApolloProvider } from '@apollo/client'
 import client from './lib/apolloClient.ts'
 import { ChatApp } from './components/chatapp.tsx';
-import "ag-grid-community/styles/ag-theme-alpine.css"; 
 
 
 

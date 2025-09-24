@@ -5,19 +5,19 @@ import { createClient } from 'graphql-ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 
 const httpLink = new HttpLink({
-  uri: 'https://supabase-nephy-dev.hasura.app/v1/graphql',
+  uri: 'https://navitronix.hasura.app/v1/graphql',
   headers: {
-    'x-hasura-admin-secret': 'tAtQWkc2iav85G6SNB17DNSMDikF2WePs5t8EXpJlmYYRH06TPZytVLlK6UCgbnu',
+    'x-hasura-admin-secret': '6Jq3rrhRADpfTtekef8mvs7obb2nzMbE59fo5DdN8NEMyPVUaekU7igt1qLNb1fG',
   },
 });
 
 const wsLink = typeof window !== 'undefined'
   ? new GraphQLWsLink(
       createClient({
-        url: 'wss://supabase-nephy-dev.hasura.app/v1/graphql', // Updated to match HTTP URL
+        url: 'wss://navitronix.hasura.app/v1/graphql', // Updated to match HTTP URL
         connectionParams: {
           headers: {
-            'x-hasura-admin-secret': 'tAtQWkc2iav85G6SNB17DNSMDikF2WePs5t8EXpJlmYYRH06TPZytVLlK6UCgbnu',
+            'x-hasura-admin-secret': '6Jq3rrhRADpfTtekef8mvs7obb2nzMbE59fo5DdN8NEMyPVUaekU7igt1qLNb1fG',
           },
         },
         retryAttempts: 3,

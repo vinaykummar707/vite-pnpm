@@ -41,37 +41,37 @@ const items = [
         icon: Armchair
     },
 
-    {
-        title: 'Patients',
-        url: '/patients',
-        icon: Users
-    },
+    // {
+    //     title: 'Patients',
+    //     url: '/patients',
+    //     icon: Users
+    // },
    
-    {
-        title: 'Machines',
-        url: '/machines',
-        icon: WashingMachine
-    },
-    {
-        title: 'Technicians',
-        url: '/technicians',
-        icon: CircleUser
-    },
-    {
-        title: 'Records',
-        url: '/records',
-        icon: WashingMachine
-    },
-    {
-        title: 'Departments',
-        url: '/departments',
-        icon: Warehouse
-    },
-    {
-        title: 'Shifts & Schedules',
-        url: '/shifts',
-        icon: CalendarClock
-    }
+    // {
+    //     title: 'Machines',
+    //     url: '/machines',
+    //     icon: WashingMachine
+    // },
+    // {
+    //     title: 'Technicians',
+    //     url: '/technicians',
+    //     icon: CircleUser
+    // },
+    // {
+    //     title: 'Records',
+    //     url: '/records',
+    //     icon: WashingMachine
+    // },
+    // {
+    //     title: 'Departments',
+    //     url: '/departments',
+    //     icon: Warehouse
+    // },
+    // {
+    //     title: 'Shifts & Schedules',
+    //     url: '/shifts',
+    //     icon: CalendarClock
+    // }
 ];
 
 export function AppSidebar() {
@@ -85,14 +85,13 @@ export function AppSidebar() {
                         <SidebarHeader className='text-xl'>Nephy</SidebarHeader>
 
                     )}
-                    <SidebarMenuItem>
-                        {/* Only show DialysisUnitSelect when sidebar is expanded */}
+                    {/* <SidebarMenuItem>
                         {state === 'expanded' && (
                             <SidebarMenuItem>
                                 <DialysisUnitSelect />
                             </SidebarMenuItem>
                         )}
-                    </SidebarMenuItem>
+                    </SidebarMenuItem> */}
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
