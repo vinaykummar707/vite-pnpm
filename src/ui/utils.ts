@@ -9,5 +9,4 @@ export const twClassNames = SubframeCore.createTwClassNames([
   "text-heading-2",
   "text-heading-1",
   "text-monospace-body",
-  "text-title",
 ]);

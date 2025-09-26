@@ -1,7 +1,7 @@
 "use client";
 /*
  * Documentation:
- * Switch — https://app.subframe.com/library?component=Switch_7a464794-9ea9-4040-b1de-5bfb2ce599d9
+ * Switch — https://app.subframe.com/74c5de8a4438/library?component=Switch_7a464794-9ea9-4040-b1de-5bfb2ce599d9
  */
 
 import React from "react";
@@ -21,7 +21,7 @@ const Thumb = React.forwardRef<HTMLDivElement, ThumbProps>(function Thumb(
     <SubframeCore.Switch.Thumb asChild={true} {...otherProps}>
       <div
         className={SubframeUtils.twClassNames(
-          "flex h-3.5 w-3.5 flex-col items-start gap-2 rounded-full bg-black shadow-sm",
+          "flex h-3.5 w-3.5 flex-col items-start gap-2 rounded-full bg-white shadow-sm",
           className
         )}
         ref={ref}

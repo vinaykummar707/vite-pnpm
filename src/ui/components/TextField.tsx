@@ -1,7 +1,7 @@
 "use client";
 /*
  * Documentation:
- * Text Field — https://app.subframe.com/library?component=Text+Field_be48ca43-f8e7-4c0e-8870-d219ea11abfe
+ * Text Field — https://app.subframe.com/74c5de8a4438/library?component=Text+Field_be48ca43-f8e7-4c0e-8870-d219ea11abfe
  */
 
 import React from "react";
@@ -23,7 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <input
       className={SubframeUtils.twClassNames(
-        "h-full w-10 border-none bg-transparent text-body font-body text-default-font outline-none placeholder:text-neutral-400",
+        "h-full w-full border-none bg-transparent text-body font-body text-default-font outline-none placeholder:text-neutral-400",
         className
       )}
       placeholder={placeholder as string}
@@ -65,14 +65,16 @@ const TextFieldRoot = React.forwardRef<HTMLLabelElement, TextFieldRootProps>(
     return (
       <label
         className={SubframeUtils.twClassNames(
-          "group/be48ca43 flex flex-col items-start gap-2",
+          "group/be48ca43 flex flex-col items-start gap-1",
           className
         )}
         ref={ref}
         {...otherProps}
       >
         {label ? (
-          <span className="text-body font-body text-default-font">{label}</span>
+          <span className="text-caption-bold font-caption-bold text-default-font">
+            {label}
+          </span>
         ) : null}
         <div
           className={SubframeUtils.twClassNames(

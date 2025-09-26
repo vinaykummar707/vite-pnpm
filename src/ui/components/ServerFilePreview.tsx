@@ -1,34 +1,37 @@
 "use client";
 /*
  * Documentation:
- * Custom Component — https://app.subframe.com/74c5de8a4438/library?component=Custom+Component_dd801442-3720-4411-b750-410f8d5a4548
  * Icon with background — https://app.subframe.com/74c5de8a4438/library?component=Icon+with+background_c5d68c0e-4c0c-4cff-8d8c-6ff334859b3a
+ * ServerFilePreview — https://app.subframe.com/74c5de8a4438/library?component=ServerFilePreview_d30239d4-65bf-4073-9b03-aa47a8f97eb8
  */
 
 import React from "react";
 import { FeatherMusic } from "@subframe/core";
+import * as SubframeCore from "@subframe/core";
 import * as SubframeUtils from "../utils";
 import { IconWithBackground } from "./IconWithBackground";
 
-interface CustomComponentRootProps
+interface ServerFilePreviewRootProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  actions?: React.ReactNode;
+  icon?: React.ReactNode;
   fileName?: React.ReactNode;
   fileSize?: React.ReactNode;
+  actions?: React.ReactNode;
   className?: string;
 }
 
-const CustomComponentRoot = React.forwardRef<
+const ServerFilePreviewRoot = React.forwardRef<
   HTMLDivElement,
-  CustomComponentRootProps
->(function CustomComponentRoot(
+  ServerFilePreviewRootProps
+>(function ServerFilePreviewRoot(
   {
-    actions,
+    icon = <FeatherMusic />,
     fileName,
     fileSize,
+    actions,
     className,
     ...otherProps
-  }: CustomComponentRootProps,
+  }: ServerFilePreviewRootProps,
   ref
 ) {
   return (
@@ -45,7 +48,7 @@ const CustomComponentRoot = React.forwardRef<
           <IconWithBackground
             variant="warning"
             size="medium"
-            icon={<FeatherMusic />}
+            icon={icon}
             square={true}
           />
           <div className="flex grow shrink-0 basis-0 flex-col items-center justify-center">
@@ -69,4 +72,4 @@ const CustomComponentRoot = React.forwardRef<
   );
 });
 
-export const CustomComponent = CustomComponentRoot;
+export const ServerFilePreview = ServerFilePreviewRoot;

@@ -1,7 +1,7 @@
 "use client";
 /*
  * Documentation:
- * Icon Button — https://app.subframe.com/library?component=Icon+Button_af9405b1-8c54-4e01-9786-5aad308224f6
+ * Icon Button — https://app.subframe.com/74c5de8a4438/library?component=Icon+Button_af9405b1-8c54-4e01-9786-5aad308224f6
  */
 
 import React from "react";
@@ -58,7 +58,7 @@ const IconButtonRoot = React.forwardRef<HTMLButtonElement, IconButtonRootProps>(
               variant === "destructive-secondary",
             "bg-error-600 hover:bg-error-500 active:bg-error-600":
               variant === "destructive-primary",
-            "border border-solid border-neutral-border bg-black hover:bg-neutral-100 active:bg-black":
+            "border border-solid border-neutral-border bg-white hover:bg-neutral-100 active:bg-white":
               variant === "neutral-secondary",
             "bg-neutral-100 hover:bg-neutral-200 active:bg-neutral-100":
               variant === "neutral-primary",
@@ -84,12 +84,12 @@ const IconButtonRoot = React.forwardRef<HTMLButtonElement, IconButtonRootProps>(
                 hidden: loading,
                 "text-body font-body": size === "small",
                 "text-heading-3 font-heading-3": size === "large",
-                "text-black group-hover/af9405b1:text-black":
+                "text-white group-hover/af9405b1:text-white":
                   variant === "inverse",
                 "text-error-700 group-hover/af9405b1:text-error-700 group-active/af9405b1:text-error-700":
                   variant === "destructive-tertiary" ||
                   variant === "destructive-secondary",
-                "text-black group-hover/af9405b1:text-black group-active/af9405b1:text-black":
+                "text-white group-hover/af9405b1:text-white group-active/af9405b1:text-white":
                   variant === "destructive-primary" ||
                   variant === "brand-primary",
                 "text-neutral-700": variant === "neutral-secondary",
@@ -109,7 +109,7 @@ const IconButtonRoot = React.forwardRef<HTMLButtonElement, IconButtonRootProps>(
             {
               "inline-block": loading,
               "text-caption font-caption": size === "small",
-              "text-black":
+              "text-white":
                 variant === "inverse" ||
                 variant === "destructive-primary" ||
                 variant === "brand-primary",

@@ -1,7 +1,7 @@
 "use client";
 /*
  * Documentation:
- * Tooltip — https://app.subframe.com/library?component=Tooltip_ccebd1e9-f6ac-4737-8376-0dfacd90c9f3
+ * Tooltip — https://app.subframe.com/74c5de8a4438/library?component=Tooltip_ccebd1e9-f6ac-4737-8376-0dfacd90c9f3
  */
 
 import React from "react";
@@ -27,7 +27,7 @@ const TooltipRoot = React.forwardRef<HTMLDivElement, TooltipRootProps>(
         {...otherProps}
       >
         {children ? (
-          <span className="text-caption font-caption text-black">
+          <span className="text-caption font-caption text-white">
             {children}
           </span>
         ) : null}

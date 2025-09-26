@@ -1,7 +1,7 @@
 "use client";
 /*
  * Documentation:
- * Link Button — https://app.subframe.com/library?component=Link+Button_a4ee726a-774c-4091-8c49-55b659356024
+ * Link Button — https://app.subframe.com/74c5de8a4438/library?component=Link+Button_a4ee726a-774c-4091-8c49-55b659356024
  */
 
 import React from "react";
@@ -54,7 +54,7 @@ const LinkButtonRoot = React.forwardRef<HTMLButtonElement, LinkButtonRootProps>(
               {
                 "text-caption font-caption": size === "small",
                 "text-heading-3 font-heading-3": size === "large",
-                "text-black group-hover/a4ee726a:text-black":
+                "text-white group-hover/a4ee726a:text-white":
                   variant === "inverse",
                 "text-brand-700 group-hover/a4ee726a:text-brand-700":
                   variant === "brand",
@@ -71,7 +71,7 @@ const LinkButtonRoot = React.forwardRef<HTMLButtonElement, LinkButtonRootProps>(
               {
                 "text-caption font-caption": size === "small",
                 "text-heading-3 font-heading-3": size === "large",
-                "text-black group-hover/a4ee726a:text-black":
+                "text-white group-hover/a4ee726a:text-white":
                   variant === "inverse",
                 "text-brand-700 group-hover/a4ee726a:text-brand-700":
                   variant === "brand",
@@ -88,7 +88,7 @@ const LinkButtonRoot = React.forwardRef<HTMLButtonElement, LinkButtonRootProps>(
               {
                 "text-caption font-caption": size === "small",
                 "text-heading-3 font-heading-3": size === "large",
-                "text-black group-hover/a4ee726a:text-black":
+                "text-white group-hover/a4ee726a:text-white":
                   variant === "inverse",
                 "text-brand-700 group-hover/a4ee726a:text-brand-700":
                   variant === "brand",

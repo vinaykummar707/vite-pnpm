@@ -1,7 +1,7 @@
 "use client";
 /*
  * Documentation:
- * Checkbox Card — https://app.subframe.com/library?component=Checkbox+Card_de0b4dfb-3946-4702-be52-5678dd71925a
+ * Checkbox Card — https://app.subframe.com/74c5de8a4438/library?component=Checkbox+Card_de0b4dfb-3946-4702-be52-5678dd71925a
  */
 
 import React from "react";
@@ -53,7 +53,7 @@ const CheckboxCardRoot = React.forwardRef<
             { hidden: hideCheckbox }
           )}
         >
-          <FeatherCheck className="hidden font-['Inter'] text-[14px] font-[400] leading-[14px] text-black group-aria-[checked=true]/de0b4dfb:inline-flex group-aria-[checked=true]/de0b4dfb:font-['Inter'] group-aria-[checked=true]/de0b4dfb:text-[16px] group-aria-[checked=true]/de0b4dfb:font-[400] group-aria-[checked=true]/de0b4dfb:leading-[16px] group-aria-[checked=true]/de0b4dfb:tracking-normal group-disabled/de0b4dfb:text-neutral-400" />
+          <FeatherCheck className="hidden font-['Inter'] text-[14px] font-[400] leading-[14px] text-white group-aria-[checked=true]/de0b4dfb:inline-flex group-aria-[checked=true]/de0b4dfb:font-['Inter'] group-aria-[checked=true]/de0b4dfb:text-[16px] group-aria-[checked=true]/de0b4dfb:font-[400] group-aria-[checked=true]/de0b4dfb:leading-[16px] group-aria-[checked=true]/de0b4dfb:tracking-normal group-disabled/de0b4dfb:text-neutral-400" />
         </div>
         {children ? (
           <div className="flex grow shrink-0 basis-0 items-center gap-4">
