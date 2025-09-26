@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { DialysisUnitSelect } from './DialysisUnitSelect';
 import { useLocation } from 'react-router-dom';
+import { OrganizationSelect } from './OrganizationSelect';
 
 // Menu items.
 const items = [

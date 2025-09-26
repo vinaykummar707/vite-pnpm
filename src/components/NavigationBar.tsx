@@ -13,6 +13,7 @@ import {
 import { LogOut } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { SidebarTrigger } from "./ui/sidebar";
+import { OrganizationSelect } from "./OrganizationSelect";
 
 export default function NavigationBar() {
     const auth = useAuth();

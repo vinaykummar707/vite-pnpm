@@ -13,6 +13,7 @@ import DepartmentsPage from './pages/Departments/DepartmentsPage'
 import TechniciansPage from './pages/Technicians/TechniciansPage'
 import DialysisRecordsPage from './pages/DialysisRecords/DialysisRecordsPage'
 import DialysisRecordDetailsPage from './pages/DialysisRecords/DialysisRecordDetailsPage'
+import StopsPage from './pages/stops/StopsPage'
 
 
 
@@ -29,6 +30,7 @@ function App() {
       <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/stops" element={<StopsPage />} />
         <Route path="/machines" element={<MachinesPage />} />
         <Route path="/patients" element={<PatientsPage />} />
         <Route path="/records" element={<DialysisRecordsPage />} />

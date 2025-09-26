@@ -1,7 +1,7 @@
 "use client";
 /*
  * Documentation:
- * Select — https://app.subframe.com/74c5de8a4438/library?component=Select_bb88f90b-8c43-4b73-9c2f-3558ce7838f3
+ * OrganizationSelect — https://app.subframe.com/74c5de8a4438/library?component=OrganizationSelect_4a479887-040f-43e0-b43b-51165f69c813
  * Sidebar with sections — https://app.subframe.com/74c5de8a4438/library?component=Sidebar+with+sections_f4047c8b-cfb4-4761-b9cf-fbcae8a9b9b5
  */
 
@@ -9,7 +9,7 @@ import React from "react";
 import { FeatherCircleDashed } from "@subframe/core";
 import * as SubframeCore from "@subframe/core";
 import * as SubframeUtils from "../utils";
-import { Select } from "./Select";
+import { OrganizationSelect } from "./OrganizationSelect";
 
 interface NavItemProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;
@@ -137,22 +137,7 @@ const SidebarWithSectionsRoot = React.forwardRef<
           {header}
         </div>
       ) : null}
-      <div className="flex w-full flex-col items-start px-4">
-        <Select
-          className="h-auto w-full flex-none"
-          disabled={false}
-          error={false}
-          variant="outline"
-          label=""
-          placeholder="Select"
-          helpText=""
-          icon={null}
-        >
-          <Select.Item value="Item 1">Item 1</Select.Item>
-          <Select.Item value="Item 2">Item 2</Select.Item>
-          <Select.Item value="Item 3">Item 3</Select.Item>
-        </Select>
-      </div>
+      <OrganizationSelect />
       {children ? (
         <div className="flex w-full grow shrink-0 basis-0 flex-col items-start px-4 py-4 overflow-auto">
           {children}
