@@ -70,7 +70,7 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
               variant === "neutral-primary",
             "bg-transparent hover:bg-brand-50 active:bg-brand-100":
               variant === "brand-tertiary",
-            "bg-brand-50 hover:bg-brand-100 active:bg-brand-50":
+            "border border-solid border-brand-primary bg-brand-50 hover:bg-brand-100 active:bg-brand-50":
               variant === "brand-secondary",
           },
           className

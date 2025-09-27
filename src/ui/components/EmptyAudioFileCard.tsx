@@ -31,7 +31,7 @@ const EmptyAudioFileCardRoot = React.forwardRef<
   return (
     <div
       className={SubframeUtils.twClassNames(
-        "flex w-full items-center justify-center gap-2 border border-solid border-neutral-border bg-neutral-50 px-2 py-2",
+        "flex w-full items-center justify-center gap-2 border border-solid border-error-400 bg-error-50 px-2 py-2",
         className
       )}
       ref={ref}
@@ -40,13 +40,13 @@ const EmptyAudioFileCardRoot = React.forwardRef<
       <div className="flex grow shrink-0 basis-0 flex-col items-center justify-center gap-2 self-stretch">
         <div className="flex w-full grow shrink-0 basis-0 flex-col items-center justify-center gap-2 px-2 py-2">
           {icon ? (
-            <SubframeCore.IconWrapper className="text-body font-body text-subtext-color">
+            <SubframeCore.IconWrapper className="text-heading-3 font-heading-3 text-error-400">
               {icon}
             </SubframeCore.IconWrapper>
           ) : null}
           <div className="flex flex-col items-center justify-center">
             {message ? (
-              <span className="w-full text-caption font-caption text-subtext-color">
+              <span className="w-full text-caption font-caption text-error-400">
                 {message}
               </span>
             ) : null}

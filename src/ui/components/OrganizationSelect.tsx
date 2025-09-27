@@ -1,11 +1,12 @@
-import React, { use } from "react";
+"use client";
+/*
+ * Documentation:
+ * OrganizationSelect — https://app.subframe.com/74c5de8a4438/library?component=OrganizationSelect_4a479887-040f-43e0-b43b-51165f69c813
+ * Select — https://app.subframe.com/74c5de8a4438/library?component=Select_bb88f90b-8c43-4b73-9c2f-3558ce7838f3
+ */
+
+import React from "react";
 import * as SubframeUtils from "../utils";
-import {
-  useOrganizationStore,
-  type Organization,
-} from "@/store/useOrganizationStore";
-import { useQuery, useSubscription } from "@apollo/client";
-import { GET_ALL_ORGANIZATIONS } from "@/gql/organizations.gql";
 import { Select } from "./Select";
 
 interface OrganizationSelectRootProps
@@ -20,18 +21,6 @@ const OrganizationSelectRoot = React.forwardRef<
   { className, ...otherProps }: OrganizationSelectRootProps,
   ref
 ) {
-  const { selectedOrganization, setSelectedOrganization } =
-    useOrganizationStore();
-
-  const { data, loading, error } = useQuery(GET_ALL_ORGANIZATIONS);
-
-  const organizations: Organization[] = data?.organizations || [];
-
-  const handleChange = (id: string) => {
-    const org = organizations.find((o) => o.id === id);
-    if (org) setSelectedOrganization(org);
-  };
-
   return (
     <div
       className={SubframeUtils.twClassNames(
@@ -44,21 +33,12 @@ const OrganizationSelectRoot = React.forwardRef<
       <Select
         className="h-auto w-full flex-none"
         label=""
-        placeholder="Select Organization"
+        placeholder="Select"
         helpText=""
-        onValueChange={handleChange}
-        value={selectedOrganization?.id ?? ""}
       >
-        {organizations.map((org) => (
-          <Select.Item key={org.id} value={org.id}>
-            {org.name}
-          </Select.Item>
-        ))}
-        {organizations.length === 0 && !loading && (
-          <p className="text-sm text-muted-foreground">
-            No organizations found
-          </p>
-        )}
+        <Select.Item value="Item 1">Item 1</Select.Item>
+        <Select.Item value="Item 2">Item 2</Select.Item>
+        <Select.Item value="Item 3">Item 3</Select.Item>
       </Select>
     </div>
   );

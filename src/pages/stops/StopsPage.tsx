@@ -2,6 +2,7 @@ import React from "react";
 import { AddStopsDialog } from "./AddStopDialog";
 import { useQuery, useSubscription } from "@apollo/client";
 import { GET_ALL_STOPS } from "@/gql/stops.gql";
+import {StopListItem, StopsList} from "@/ui";
 
 const StopsPage: React.FC = () => {
   const { data, loading, error } = useQuery(GET_ALL_STOPS);
@@ -14,9 +15,9 @@ const StopsPage: React.FC = () => {
         Stops
       </span>
 
-      {
-        
-      }
+
+        <StopsList stops={data.stops}/>
+
     </div>
   );
 };

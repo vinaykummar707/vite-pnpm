@@ -13,8 +13,8 @@
  * Timeline Divider — https://app.subframe.com/74c5de8a4438/library?component=Timeline+Divider_c388f693-3fdb-4403-b46d-41c16f1b213a
  */
 
-import React from "react";
-import { FeatherCopy } from "@subframe/core";
+import React, {type ChangeEvent, useRef, useState} from "react";
+import {FeatherCopy, FeatherTrash2} from "@subframe/core";
 import { FeatherDownload } from "@subframe/core";
 import { FeatherFileWarning } from "@subframe/core";
 import { FeatherLanguages } from "@subframe/core";
@@ -35,20 +35,49 @@ import { Select } from "./Select";
 import { ServerFilePreview } from "./ServerFilePreview";
 import { TextField } from "./TextField";
 import { TimelineDivider } from "./TimelineDivider";
+import {LocalFilePreview} from "@/ui/components/LocalFilePreview.tsx";
+import {generateAudio, uploadAudio} from "@/utilities/generateAndUploadAudio.ts";
 
 interface AnnouncementListItemRootProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  language?: React.ReactNode;
+  language?: string;
   className?: string;
+  audio: any;
+  stopInfo:string
+    langCode: string;
 }
 
 const AnnouncementListItemRoot = React.forwardRef<
   HTMLDivElement,
   AnnouncementListItemRootProps
 >(function AnnouncementListItemRoot(
-  { language, className, ...otherProps }: AnnouncementListItemRootProps,
+  { language, className, audio,stopInfo, langCode, ...otherProps }: AnnouncementListItemRootProps,
   ref
 ) {
+    const [file, setFile] = useState<File | null>(null);
+    const [fileUrl, setFileUrl] = useState<string | null>(null);
+
+    const [queryText, setQueryText] = useState<string>('')
+
+
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const localAudioRef = useRef<HTMLAudioElement>(null);
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0];
+        if (selectedFile && selectedFile.type === "audio/wav") {
+            setFile(selectedFile);
+            setFileUrl(URL.createObjectURL(selectedFile));
+        } else {
+            alert("Please select a valid .wav file");
+        }
+    };
+
+    const handleSelectClick = () => {
+        inputRef.current?.click();
+    };
   return (
     <div
       className={SubframeUtils.twClassNames(
@@ -76,7 +105,7 @@ const AnnouncementListItemRoot = React.forwardRef<
               <Accordion.Chevron />
             </div>
           }
-          defaultOpen={true}
+          defaultOpen={false}
         >
           <div className="flex w-full flex-col items-start rounded-md border-t border-solid border-neutral-border">
             <div className="flex w-full flex-col items-start gap-4 px-6 py-6">
@@ -84,49 +113,64 @@ const AnnouncementListItemRoot = React.forwardRef<
                 File in server
               </span>
               <div className="flex w-full flex-col items-start gap-2">
-                <ServerFilePreview
-                  icon={<FeatherMusic />}
-                  fileName="Secunderabad-En-Current.wav"
-                  fileSize="25kb"
-                  actions={
-                    <>
-                      <Button
-                        disabled={false}
-                        variant="neutral-secondary"
-                        size="medium"
-                        icon={<FeatherPlay />}
-                        iconRight={null}
-                        loading={false}
-                      >
-                        Play
-                      </Button>
-                      <Button
-                        disabled={false}
-                        variant="neutral-secondary"
-                        size="medium"
-                        icon={<FeatherDownload />}
-                        iconRight={null}
-                        loading={false}
-                      >
-                        Download
-                      </Button>
-                      <Button
-                        disabled={false}
-                        variant="neutral-secondary"
-                        size="medium"
-                        icon={<FeatherCopy />}
-                        iconRight={null}
-                        loading={false}
-                      >
-                        Copy Url
-                      </Button>
-                    </>
-                  }
-                />
-                <EmptyAudioFileCard
-                  icon={<FeatherFileWarning />}
-                  message="No audio file found in server. Use below methods to generate audio file"
-                />
+                  {audio && <ServerFilePreview
+                      icon={<FeatherMusic/>}
+                      fileName={audio.file_name}
+                      fileSize={audio.file_size}
+                      actions={
+                          <>
+                              <audio ref={audioRef} className={'hidden'} src={audio.url}></audio>
+                              <Button
+                                  disabled={false}
+                                  variant="neutral-secondary"
+                                  size="medium"
+                                  icon={<FeatherPlay/>}
+                                  iconRight={null}
+                                  loading={false}
+                                  onClick={() => audioRef?.current?.play()}
+                              >
+                                  Play
+                              </Button>
+                              <Button
+                                  disabled={false}
+                                  variant="neutral-secondary"
+                                  size="medium"
+                                  icon={<FeatherDownload/>}
+                                  iconRight={null}
+                                  loading={false}
+                                  onClick={() => window.open(audio.url,'_blank')}
+                              >
+                                  Download
+                              </Button>
+                              <Button
+                                  disabled={false}
+                                  variant="neutral-secondary"
+                                  size="medium"
+                                  icon={<FeatherCopy/>}
+                                  iconRight={null}
+                                  loading={false}
+                                  onClick={() => navigator.clipboard.writeText(audio.url)}
+                              >
+                                  Copy Url
+                              </Button>
+                              <Button
+                                  disabled={false}
+                                  variant="destructive-primary"
+                                  size="medium"
+                                  icon={<FeatherTrash2 />}
+                                  iconRight={null}
+                                  loading={false}
+                                  onClick={(event: React.MouseEvent<HTMLButtonElement>) => {}}
+                              >
+                                  Delete
+                              </Button>
+                          </>
+                      }
+                  />}
+                  {!audio && <EmptyAudioFileCard
+                      icon={<FeatherFileWarning/>}
+                      message="No audio file found in server. Use below methods to upload audio file"
+                  />}
               </div>
               <div className="flex w-full flex-col items-start gap-4">
                 <span className="text-caption-bold font-caption-bold text-default-font">
@@ -136,22 +180,33 @@ const AnnouncementListItemRoot = React.forwardRef<
                   <FeatherUploadCloud className="text-heading-1 font-heading-1 text-brand-700" />
                   <div className="flex flex-col items-center justify-center gap-1">
                     <span className="text-body font-body text-default-font text-center">
-                      Click to select files or drag to upload
+                      Click to select files
                     </span>
                     <span className="text-caption font-caption text-subtext-color text-center">
-                      Up to 100 files, max file size 5MB
+                      Up to 1 file, max file size 5MB
                     </span>
                   </div>
+                    {/* Hidden file input */}
+                    <input
+                        type="file"
+                        accept=".wav,audio/wav"
+                        ref={inputRef}
+                        multiple={false}
+                        onChange={handleFileChange}
+                        style={{ display: "none" }}
+                    />
                   <Button
                     disabled={false}
                     variant="neutral-primary"
                     size="medium"
-                    icon={null}
+                    icon={<FeatherMusic/>}
                     iconRight={null}
                     loading={false}
+                    onClick={handleSelectClick}
                   >
                     Choose Wav File
                   </Button>
+
                 </div>
               </div>
               <TimelineDivider>Or</TimelineDivider>
@@ -165,11 +220,13 @@ const AnnouncementListItemRoot = React.forwardRef<
                       <div className="flex grow shrink-0 basis-0 items-center gap-2 self-stretch">
                         <div className="flex grow shrink-0 basis-0 items-start gap-2 self-stretch">
                           <TextField
-                            className="h-auto grow shrink-0 basis-0"
+                            className="h-full grow shrink-0 basis-0"
                             label=""
                             helpText=""
                           >
-                            <TextField.Input placeholder="Type text here " />
+                            <TextField.Input onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                setQueryText(event.target.value)
+                            }} placeholder="Type text here " />
                           </TextField>
                         </div>
                       </div>
@@ -187,57 +244,77 @@ const AnnouncementListItemRoot = React.forwardRef<
                         <Select.Item value="Item 2">Item 2</Select.Item>
                         <Select.Item value="Item 3">Item 3</Select.Item>
                       </Select>
-                      <Button icon={<FeatherSparkle />}>Generate</Button>
+                      <Button onClick={async () => {
+                          const generatedFile  = await generateAudio(queryText, `${langCode}-IN`, 'anushka')
+                          setFile(generatedFile)
+                          const url = URL.createObjectURL(generatedFile);
+                          setFileUrl(url);
+                          console.log(url)
+                      }} className={'h-full'} icon={<FeatherSparkle />}>Generate</Button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="flex w-full flex-col items-start gap-2">
-                <CustomComponent
-                  actions={
-                    <>
-                      <Button
-                        disabled={false}
-                        variant="neutral-secondary"
-                        size="medium"
-                        icon={<FeatherPlay />}
-                        iconRight={null}
-                        loading={false}
-                      >
-                        Play
-                      </Button>
-                      <Button
-                        disabled={false}
-                        variant="neutral-secondary"
-                        size="medium"
-                        icon={<FeatherUpload />}
-                        iconRight={null}
-                        loading={false}
-                      >
-                        Upload To Server
-                      </Button>
-                    </>
-                  }
-                  fileName="Evaluate results"
-                  fileSize="Validate your hypothesis with data"
-                />
-              </div>
-              <div className="flex w-full items-center justify-end gap-2">
-                <Button
-                  className="h-8 grow shrink-0 basis-0"
-                  variant="brand-secondary"
-                  icon={<FeatherUpload />}
-                >
-                  Submit To Server
-                </Button>
-                <Button
-                  className="h-8 grow shrink-0 basis-0"
-                  variant="destructive-secondary"
-                  icon={<FeatherTrash />}
-                >
-                  Delete
-                </Button>
-              </div>
+
+                <span className="text-caption-bold font-caption-bold text-default-font">
+                Selected or generated audio file
+              </span>
+
+                {
+                    file && <LocalFilePreview
+                        icon={<FeatherMusic />}
+                        fileName={file.name}
+                        fileSize={file.size}
+                        actions={
+                            <>
+                                <audio ref={localAudioRef} className={'hidden'} src={fileUrl}></audio>
+                                <Button
+                                    disabled={false}
+                                    variant="neutral-secondary"
+                                    size="medium"
+                                    icon={<FeatherPlay />}
+                                    iconRight={null}
+                                    loading={false}
+                                    onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                                        localAudioRef?.current?.play()
+                                    }}
+                                >
+                                    Play
+                                </Button>
+                                <Button
+                                    disabled={false}
+                                    variant="brand-secondary"
+                                    size="medium"
+                                    icon={<FeatherUpload />}
+                                    iconRight={null}
+                                    loading={false}
+                                    onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                                        const res = uploadAudio(
+                                            file,audio,'current',stopInfo,language
+                                        )
+                                    }}
+                                >
+                                    Upload
+                                </Button>
+                                <Button
+                                    disabled={false}
+                                    variant="neutral-secondary"
+                                    size="medium"
+                                    icon={<FeatherTrash2 />}
+                                    iconRight={null}
+                                    loading={false}
+                                    onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                                        setFile(null)
+                                    }}
+                                >
+                                    Discard
+                                </Button>
+                            </>
+                        }
+                    />
+
+                }
+
             </div>
           </div>
         </Accordion>

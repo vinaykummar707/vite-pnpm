@@ -34,7 +34,7 @@ const CustomComponentRoot = React.forwardRef<
   return (
     <div
       className={SubframeUtils.twClassNames(
-        "flex w-full items-center justify-center gap-2 border border-solid border-neutral-border bg-neutral-50 px-2 py-2",
+        "flex w-full items-center justify-center gap-2 border border-solid border-neutral-border bg-neutral-100 px-3 py-2",
         className
       )}
       ref={ref}

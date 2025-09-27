@@ -10,7 +10,7 @@
  */
 
 import React from "react";
-import { FeatherChevronsDown } from "@subframe/core";
+import {FeatherArrowRight, FeatherChevronsDown, FeatherMapPin, FeatherPlaneLanding} from "@subframe/core";
 import { FeatherChevronsUp } from "@subframe/core";
 import { FeatherNavigation } from "@subframe/core";
 import { FeatherPen } from "@subframe/core";
@@ -21,16 +21,20 @@ import { Button } from "./Button";
 import { StopListItem } from "./StopListItem";
 import { Tabs } from "./Tabs";
 import { UpCoordinatesCard } from "./UpCoordinatesCard";
+import CurrentStopAnnouncements from "@/ui/CurrentStopAnnouncements.tsx";
 
 interface StopsListRootProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
+  stops: any[]
 }
 
 const StopsListRoot = React.forwardRef<HTMLDivElement, StopsListRootProps>(
   function StopsListRoot(
-    { className, ...otherProps }: StopsListRootProps,
+    { className,stops, ...otherProps }: StopsListRootProps,
     ref
   ) {
+      const googleMapsUrl = (lat: number, lng: number) =>
+          `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
     return (
       <div
         className={SubframeUtils.twClassNames(
@@ -40,8 +44,12 @@ const StopsListRoot = React.forwardRef<HTMLDivElement, StopsListRootProps>(
         ref={ref}
         {...otherProps}
       >
+          {
+              stops.map((stop:any, index:number) =>
+
         <StopListItem
-          locationName="Kushaiguda"
+            key={index}
+          locationName={stop.name}
           actions={
             <>
               <Button
@@ -70,8 +78,8 @@ const StopsListRoot = React.forwardRef<HTMLDivElement, StopsListRootProps>(
             <UpCoordinatesCard
               icon={<FeatherChevronsUp />}
               title="Up Locations"
-              latitude="Lat : 12.889932"
-              longitude="Lng: 23.2313123"
+              latitude={`Lat : ${stop.up_latitude}`}
+              longitude={`Lat : ${stop.up_longitude}`}
               navigationButton={
                 <Button
                   disabled={false}
@@ -80,6 +88,11 @@ const StopsListRoot = React.forwardRef<HTMLDivElement, StopsListRootProps>(
                   icon={<FeatherNavigation />}
                   iconRight={null}
                   loading={false}
+                  onClick={ () => window.open(googleMapsUrl(
+                      stop.up_latitude,
+                      stop.up_longitude
+                  ),'_blank')}
+
                 >
                   Navigate
                 </Button>
@@ -90,8 +103,8 @@ const StopsListRoot = React.forwardRef<HTMLDivElement, StopsListRootProps>(
             <UpCoordinatesCard
               icon={<FeatherChevronsDown />}
               title="Down Locations"
-              latitude="Lat : 12.889932"
-              longitude="Lng: 23.2313123"
+              latitude={`Lat : ${stop.down_latitude}`}
+              longitude={`Lat : ${stop.down_longitude}`}
               navigationButton={
                 <Button
                   disabled={false}
@@ -100,6 +113,10 @@ const StopsListRoot = React.forwardRef<HTMLDivElement, StopsListRootProps>(
                   icon={<FeatherNavigation />}
                   iconRight={null}
                   loading={false}
+                  onClick={ () => window.open(googleMapsUrl(
+                      stop.up_latitude,
+                      stop.up_longitude
+                  ),'_blank')}
                 >
                   Navigate
                 </Button>
@@ -108,15 +125,23 @@ const StopsListRoot = React.forwardRef<HTMLDivElement, StopsListRootProps>(
           }
           tabsAndAnnouncements={
             <>
-              <Tabs>
-                <Tabs.Item active={true}>Tab</Tabs.Item>
-                <Tabs.Item active={false}>Tab</Tabs.Item>
-                <Tabs.Item>Tab</Tabs.Item>
-              </Tabs>
-              <AnnouncementListItem language="English" />
+                <Tabs>
+                    <Tabs.Item active={true} icon={<FeatherMapPin />}>
+                        Current Stop
+                    </Tabs.Item>
+                    <Tabs.Item active={false} icon={<FeatherArrowRight />}>
+                        Next Stop
+                    </Tabs.Item>
+                    <Tabs.Item icon={<FeatherPlaneLanding />}>Arriving Stop</Tabs.Item>
+                </Tabs>
+
+                <CurrentStopAnnouncements stopId={stop.id} />
+
             </>
           }
         />
+              )
+          }
       </div>
     );
   }

@@ -29,14 +29,14 @@ const AudioGenerationComponentRoot = React.forwardRef<
   return (
     <div
       className={SubframeUtils.twClassNames(
-        "flex w-full items-center gap-2",
+        "flex h-10 w-full items-center gap-2",
         className
       )}
       ref={ref}
       {...otherProps}
     >
       {input ? (
-        <div className="flex grow shrink-0 basis-0 items-center gap-2 self-stretch">
+        <div className="flex h-10 grow shrink-0 basis-0 items-center gap-2">
           {input}
         </div>
       ) : null}
