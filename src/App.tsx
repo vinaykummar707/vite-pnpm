@@ -14,6 +14,7 @@ import TechniciansPage from './pages/Technicians/TechniciansPage'
 import DialysisRecordsPage from './pages/DialysisRecords/DialysisRecordsPage'
 import DialysisRecordDetailsPage from './pages/DialysisRecords/DialysisRecordDetailsPage'
 import StopsPage from './pages/stops/StopsPage'
+import RouteCreationPage from "@/pages/Routes/RouteCreation/RouteCreationPage.tsx";
 
 
 
@@ -38,6 +39,7 @@ function App() {
         <Route path="/departments" element={<DepartmentsPage />} />
         <Route path="/technicians" element={<TechniciansPage />} />
       </Route>
+        <Route path="/routes/create" element={<RouteCreationPage />} />
     </Routes>
   )
 }

@@ -21,7 +21,8 @@ interface ButtonRootProps
     | "destructive-primary"
     | "destructive-secondary"
     | "destructive-tertiary"
-    | "inverse";
+    | "inverse"
+    | "neutral-secondary-2";
   size?: "large" | "medium" | "small";
   children?: React.ReactNode;
   icon?: React.ReactNode;
@@ -54,6 +55,8 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
           {
             "h-6 w-auto flex-row flex-nowrap gap-1 px-2 py-0": size === "small",
             "h-10 w-auto px-4 py-0": size === "large",
+            "border-none bg-default-background hover:bg-neutral-50 active:bg-default-background":
+              variant === "neutral-secondary-2",
             "bg-transparent hover:bg-[#ffffff29] active:bg-[#ffffff3d]":
               variant === "inverse",
             "bg-transparent hover:bg-error-50 active:bg-error-100":
@@ -68,7 +71,7 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
               variant === "neutral-secondary",
             "bg-neutral-100 hover:bg-neutral-200 active:bg-neutral-100":
               variant === "neutral-primary",
-            "bg-transparent hover:bg-brand-50 active:bg-brand-100":
+            "border border-solid border-brand-primary bg-transparent hover:bg-brand-50 active:bg-brand-100":
               variant === "brand-tertiary",
             "border border-solid border-brand-primary bg-brand-50 hover:bg-brand-100 active:bg-brand-50":
               variant === "brand-secondary",
@@ -88,14 +91,15 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
                 hidden: loading,
                 "text-body font-body": size === "small",
                 "text-heading-3 font-heading-3": size === "large",
+                "text-neutral-700":
+                  variant === "neutral-secondary-2" ||
+                  variant === "neutral-tertiary" ||
+                  variant === "neutral-secondary" ||
+                  variant === "neutral-primary",
                 "text-white": variant === "inverse",
                 "text-error-700":
                   variant === "destructive-tertiary" ||
                   variant === "destructive-secondary",
-                "text-neutral-700":
-                  variant === "neutral-tertiary" ||
-                  variant === "neutral-secondary" ||
-                  variant === "neutral-primary",
                 "text-brand-700":
                   variant === "brand-tertiary" || variant === "brand-secondary",
               }
@@ -117,13 +121,14 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
                 "inline-block font-['Inter'] text-[12px] font-[400] leading-[20px] tracking-normal":
                   loading,
                 "text-caption font-caption": size === "small",
-                "text-error-700":
-                  variant === "destructive-tertiary" ||
-                  variant === "destructive-secondary",
                 "text-neutral-700":
+                  variant === "neutral-secondary-2" ||
                   variant === "neutral-tertiary" ||
                   variant === "neutral-secondary" ||
                   variant === "neutral-primary",
+                "text-error-700":
+                  variant === "destructive-tertiary" ||
+                  variant === "destructive-secondary",
                 "text-brand-700":
                   variant === "brand-tertiary" || variant === "brand-secondary",
               }
@@ -138,14 +143,15 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
                 hidden: loading,
                 "text-caption-bold font-caption-bold": size === "small",
                 "text-body-bold font-body-bold": size === "large",
+                "text-neutral-700":
+                  variant === "neutral-secondary-2" ||
+                  variant === "neutral-tertiary" ||
+                  variant === "neutral-secondary" ||
+                  variant === "neutral-primary",
                 "text-white": variant === "inverse",
                 "text-error-700":
                   variant === "destructive-tertiary" ||
                   variant === "destructive-secondary",
-                "text-neutral-700":
-                  variant === "neutral-tertiary" ||
-                  variant === "neutral-secondary" ||
-                  variant === "neutral-primary",
                 "text-brand-700":
                   variant === "brand-tertiary" || variant === "brand-secondary",
               }
@@ -161,14 +167,15 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
               {
                 "text-body font-body": size === "small",
                 "text-heading-3 font-heading-3": size === "large",
+                "text-neutral-700":
+                  variant === "neutral-secondary-2" ||
+                  variant === "neutral-tertiary" ||
+                  variant === "neutral-secondary" ||
+                  variant === "neutral-primary",
                 "text-white": variant === "inverse",
                 "text-error-700":
                   variant === "destructive-tertiary" ||
                   variant === "destructive-secondary",
-                "text-neutral-700":
-                  variant === "neutral-tertiary" ||
-                  variant === "neutral-secondary" ||
-                  variant === "neutral-primary",
                 "text-brand-700":
                   variant === "brand-tertiary" || variant === "brand-secondary",
               }

@@ -45,14 +45,14 @@ const DefaultPageLayoutRoot = React.forwardRef<
   return (
     <div
       className={SubframeUtils.twClassNames(
-        "flex h-screen w-full items-start",
+        "flex h-screen w-full items-start bg-neutral-100",
         className
       )}
       ref={ref}
       {...otherProps}
     >
       <SidebarWithSections
-        className="mobile:hidden"
+        className="h-auto w-56 flex-none self-stretch mobile:hidden"
         header={
           <img
             className="h-6 flex-none object-cover"
@@ -135,7 +135,7 @@ const DefaultPageLayoutRoot = React.forwardRef<
         </SidebarWithSections.NavSection>
       </SidebarWithSections>
       {children ? (
-        <div className="flex grow shrink-0 basis-0 flex-col items-start gap-4 self-stretch overflow-y-auto bg-default-background">
+        <div className="flex grow shrink-0 basis-0 flex-col items-start gap-4 self-stretch overflow-y-auto bg-neutral-50">
           {children}
         </div>
       ) : null}

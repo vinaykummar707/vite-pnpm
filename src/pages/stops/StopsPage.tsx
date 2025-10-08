@@ -11,12 +11,12 @@ const StopsPage: React.FC = () => {
   if (error) return <div>Error loading stops: {error.message}</div>;
   return (
     <div className="flex h-full w-full flex-col items-start gap-4 bg-default-background px-12 py-12">
-      <span className="text-heading-2 font-heading-2 text-default-font">
-        Stops
-      </span>
+      // <span className="text-heading-2 font-heading-2 text-default-font">
+      //   Stops
+      // </span>
 
 
-        <StopsList stops={data.stops}/>
+      //   <StopsList stops={data.stops}/>
 
     </div>
   );

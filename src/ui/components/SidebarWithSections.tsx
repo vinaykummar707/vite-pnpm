@@ -34,7 +34,7 @@ const NavItem = React.forwardRef<HTMLDivElement, NavItemProps>(function NavItem(
     <div
       className={SubframeUtils.twClassNames(
         "group/2713e17b flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 hover:bg-neutral-50 active:bg-neutral-100",
-        { "bg-brand-50 hover:bg-brand-50 active:bg-brand-100": selected },
+        { "bg-brand-100 hover:bg-brand-50 active:bg-brand-100": selected },
         className
       )}
       ref={ref}
@@ -43,8 +43,8 @@ const NavItem = React.forwardRef<HTMLDivElement, NavItemProps>(function NavItem(
       {icon ? (
         <SubframeCore.IconWrapper
           className={SubframeUtils.twClassNames(
-            "text-heading-3 font-heading-3 text-neutral-600",
-            { "text-brand-700": selected }
+            "text-heading-3 font-heading-3 text-neutral-900",
+            { "text-brand-900": selected }
           )}
         >
           {icon}
@@ -53,8 +53,8 @@ const NavItem = React.forwardRef<HTMLDivElement, NavItemProps>(function NavItem(
       {children ? (
         <span
           className={SubframeUtils.twClassNames(
-            "line-clamp-1 grow shrink-0 basis-0 text-body-bold font-body-bold text-neutral-600",
-            { "text-brand-700": selected }
+            "line-clamp-1 grow shrink-0 basis-0 text-body-bold font-body-bold text-neutral-900",
+            { "text-brand-900": selected }
           )}
         >
           {children}
@@ -126,7 +126,7 @@ const SidebarWithSectionsRoot = React.forwardRef<
   return (
     <nav
       className={SubframeUtils.twClassNames(
-        "flex h-full w-60 flex-col items-start border-r border-solid border-neutral-border bg-default-background",
+        "flex h-full w-60 flex-col items-start border-r border-solid border-neutral-border",
         className
       )}
       ref={ref}
@@ -144,7 +144,7 @@ const SidebarWithSectionsRoot = React.forwardRef<
         </div>
       ) : null}
       {footer ? (
-        <div className="flex w-full items-center gap-4 border-t border-solid border-neutral-border px-6 py-6">
+        <div className="flex w-full items-center gap-4 border-t border-solid border-default-background px-4 py-4">
           {footer}
         </div>
       ) : null}
